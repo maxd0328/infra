@@ -1,0 +1,19 @@
+global:
+  domain: argocd.derbserv.hq
+
+configs:
+  cm:
+    # admin.enabled: false
+
+    oidc.config: |
+      name: SSO
+      issuer: http://iam.stg.derbserv.hq:8081/auth/realms/derbserv
+      clientID: $argocd-client-creds:clientId
+      clientSecret: $argocd-client-creds:clientSecret
+      requestedScopes: ['openid', 'profile', 'email', 'groups']
+ 
+  rbac:
+    policy.default: role:readonly
+    policy.csv: |
+      g, argocd-admins, role:admin
+      g, argocd-viewers, role:readonly

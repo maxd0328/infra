@@ -6,7 +6,7 @@
 pushd "$(dirname "$0")" > /dev/null
 
 # Start cluster
-k3d cluster create intranet-cluster
+k3d cluster create intranet-cluster -p "8081:80@loadbalancer"
 
 # Navigate to the ArgoCD bootstrap Terraform directory
 cd argocd/

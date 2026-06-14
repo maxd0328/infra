@@ -6,6 +6,10 @@ resource "helm_release" "argocd" {
 
   namespace        = "argocd"
   create_namespace = true
+
+  values = [
+    "${file("values.yaml")}"
+  ]
 }
 
 resource "kubernetes_manifest" "apps" {
