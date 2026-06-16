@@ -1,13 +1,20 @@
 global:
   domain: argocd.derbserv.hq
 
+server:
+  ingress:
+    enabled: true
+
 configs:
+  params:
+    server.insecure: true
+
   cm:
     # admin.enabled: false
 
     oidc.config: |
-      name: SSO
-      issuer: http://iam.stg.derbserv.hq:8081/auth/realms/derbserv
+      name: IAM
+      issuer: http://iam.stg.derbserv.hq/realms/derbserv
       clientID: $argocd-client-creds:clientId
       clientSecret: $argocd-client-creds:clientSecret
       requestedScopes: ['openid', 'profile', 'email', 'groups']
