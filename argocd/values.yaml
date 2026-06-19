@@ -15,12 +15,12 @@ configs:
     oidc.config: |
       name: IAM
       issuer: http://iam.stg.derbserv.hq/realms/derbserv
-      clientID: $argocd-client-creds:clientId
-      clientSecret: $argocd-client-creds:clientSecret
+      clientID: $argocd-client-creds:key
+      clientSecret: $argocd-client-creds:secret
       requestedScopes: ['openid', 'profile', 'email', 'groups']
  
   rbac:
-    policy.default: role:readonly
+    policy.default: role:none
     policy.csv: |
       g, argocd-admins, role:admin
       g, argocd-viewers, role:readonly
